@@ -1,0 +1,128 @@
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background: #111827;
+  color: #f9fafb;
+}
+
+.sidebar {
+  width: 250px;
+  background: #1f2937;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn-back {
+  background: #6b7280;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.btn-back:hover {
+  background: #4b5563;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filters input,
+.filters select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #4b5563;
+  background: #374151;
+  color: #d1d5db;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.result-table th,
+.result-table td {
+  padding: 10px;
+  border-bottom: 1px solid #4b5563;
+}
+
+.result-table th {
+  background: #374151;
+  text-align: left;
+}
+
+.status-passed {
+  color: #10b981;
+  font-weight: bold;
+}
+
+.status-failed {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit {
+  background: #22c55e;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.btn-edit:hover {
+  background: #16a34a;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+.text-center {
+  text-align: center;
+}

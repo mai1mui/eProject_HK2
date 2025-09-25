@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ELMS • Feedback Management</title>
+<style>
+  :root{
+    --bg:#0b1220; --bg2:#0f172a; --text:#e8eefc; --muted:#9db0d1;
+    --primary:#5b8cfe; --primary-600:#3d73ff; --ring:#83a2ff;
+    --danger:#ff6b6b; --ok:#21c38b;
+  }
+  body{
+    margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--text);background:linear-gradient(160deg, var(--bg), var(--bg2));
+    min-height:100vh;display:grid;place-items:center;padding:20px;
+  }
+  .card{
+    width:min(900px, 100%);background:#0e1731;border:1px solid #25335f;
+    border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.4);
+  }
+  h1{margin:0 0 18px;text-align:center}
+  form{display:grid;gap:14px;margin-bottom:26px}
+  label{font-weight:600}
+  .input,.select,.textarea{
+    width:100%;border-radius:12px;border:1px solid #2a3860;background:#0b1533;
+    color:var(--text);padding:12px;font-size:1rem;outline:2px solid transparent;
+  }
+  .textarea{min-height:90px;resize:vertical}
+  .input:focus,.select:focus,.textarea:focus{outline-color:var(--ring)}
+  .btn{
+    appearance:none;border:0;border-radius:12px;padding:12px 18px;
+    font-weight:700;cursor:pointer;transition:.2s ease
+  }
+  .btn-primary{background:linear-gradient(180deg,var(--primary),var(--primary-600));color:white}
+  .btn-primary:hover{filter:brightness(1.08)}
+  .btn-danger{background:var(--danger);color:white}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid #2a3655}
+  .row{display:flex;gap:10px}
+  table{width:100%;border-collapse:collapse;margin-top:14px}
+  th,td{padding:12px;border-bottom:1px solid #2a2e50;text-align:left}
+  th{background:#18203a}
+  tr:hover td{background:#151d33}
+  .rating{color:#f5d742;font-size:1.1rem}
+  .status{font-weight:600}
+  .status.ok{color:var(--ok)}.status.pending{color:var(--danger)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Feedback & Reports</h1>
+
+    <!-- Student feedback form -->
+    <form id="feedbackForm">
+      <div>
+        <label for="course">Course</label>
+        <select id="course" class="select" required>
+          <option value="">-- Select a course --</option>
+          <option value="Math101">Math 101</option>
+          <option value="CS201">Computer Science 201</option>
+          <option value="History305">History 305</option>
+        </select>
+      </div>
+      <div>
+        <label for="rating">Rating</label>
+        <select id="rating" class="select" required>
+          <option value="">-- Select rating --</option>
+          <option value="5">⭐⭐⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="1">⭐</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Feedback</label>
+        <textarea id="message" class="textarea" placeholder="Write your feedback here..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </form>
+
+    <!-- Feedback list (for Teacher/Admin) -->
+    <h2>All Feedback</h2>
+    <table id="feedbackTable">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Rating</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- rows injected by JS -->
+      </tbody>
+    </table>
+  </div>
+
+<script>
+  const form=document.getElementById("feedbackForm");
+  const tableBody=document.querySelector("#feedbackTable tbody");
+
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    const course=document.getElementById("course").value;
+    const rating=document.getElementById("rating").value;
+    const msg=document.getElementById("message").value.trim();
+
+    if(!course||!rating||!msg){alert("Please fill all fields.");return}
+
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${course}</td>
+      <td class="rating">${"⭐".repeat(rating)}</td>
+      <td>${msg}</td>
+      <td class="status pending">Pending</td>
+      <td class="row">
+        <button class="btn btn-primary btn-sm" onclick="markResolved(this)">Resolve</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button>
+      </td>`;
+    tableBody.appendChild(tr);
+
+    form.reset();
+  });
+
+  function deleteRow(btn){btn.closest("tr").remove();}
+  function markResolved(btn){
+    const row=btn.closest("tr").querySelector(".status");
+    row.textContent="Resolved";row.className="status ok";
+  }
+</script>
+</body>
+</html>

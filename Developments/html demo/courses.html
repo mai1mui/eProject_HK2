@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ELMS • Student Courses</title>
+<style>
+  :root{
+    --bg:#0b1220; --bg2:#0f172a; --text:#e8eefc; --muted:#9db0d1;
+    --primary:#5b8cfe; --primary-600:#3d73ff; --ring:#83a2ff;
+    --ok:#21c38b; --danger:#ff6b6b; --shadow:0 20px 40px rgba(0,0,0,.35);
+  }
+  body{
+    margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--text);
+    background:linear-gradient(160deg,var(--bg),var(--bg2));
+    min-height:100vh;display:flex;flex-direction:column;
+  }
+  header{
+    display:flex;align-items:center;gap:16px;padding:16px 22px;
+    background:#101b35;border-bottom:1px solid #1f2b50;
+  }
+  .logo{width:32px;height:32px;border-radius:8px;
+    background:conic-gradient(from 210deg,#6dd0ff,#6e8dff,#a98bff,#6dd0ff)}
+  header h1{font-size:1.2rem;margin:0}
+  nav{margin-left:auto;display:flex;gap:14px}
+  nav a{color:var(--muted);text-decoration:none;font-weight:600}
+  nav a:hover{color:var(--text)}
+  main{flex:1;max-width:1100px;margin:0 auto;padding:26px 20px}
+  .controls{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+  .input,.select{
+    border-radius:10px;border:1px solid #2a3860;background:#0b1533;
+    color:var(--text);padding:10px 12px;font-size:1rem;
+  }
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+  .card{
+    background:linear-gradient(180deg,#0e1731ee,#0a122bfa);
+    border:1px solid #25335f;border-radius:16px;box-shadow:var(--shadow);
+    padding:18px;display:flex;flex-direction:column;gap:12px
+  }
+  .card h3{margin:0}
+  .card p{margin:0;color:var(--muted);font-size:.95rem}
+  .progress{height:10px;background:#1c294d;border-radius:6px;overflow:hidden}
+  .progress span{display:block;height:100%;background:var(--primary)}
+  .btn{
+    border:0;border-radius:10px;padding:10px 14px;font-weight:700;
+    cursor:pointer;text-align:center
+  }
+  .btn-primary{
+    background:linear-gradient(180deg,var(--primary),var(--primary-600));
+    color:#fff;align-self:flex-start
+  }
+  .btn-primary:hover{filter:brightness(1.05)}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo"></div>
+    <h1>Student Courses</h1>
+    <nav>
+      <a href="student-dashboard.html">Reports & Feedback</a>
+      <a href="student-profile.html">Profile</a>
+      <a href="index.html">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="controls">
+      <input class="input" id="search" placeholder="Search courses..." />
+      <select class="select" id="filter">
+        <option value="all">All Courses</option>
+        <option value="enrolled">Enrolled</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+
+    <div class="grid" id="courseGrid">
+      <!-- Courses will be injected here -->
+    </div>
+  </main>
+
+<script>
+  const courses = [
+    {id:1,title:"Web Development Basics",desc:"Learn HTML, CSS, JS from scratch.",progress:70,status:"enrolled"},
+    {id:2,title:"Advanced PHP & Laravel",desc:"Deep dive into backend dev.",progress:20,status:"enrolled"},
+    {id:3,title:"Data Science Intro",desc:"Python, Pandas, Visualization.",progress:100,status:"completed"},
+    {id:4,title:"UI/UX Design",desc:"Principles of user-centered design.",progress:0,status:"all"},
+  ];
+
+  const grid = document.getElementById('courseGrid');
+  const searchEl = document.getElementById('search');
+  const filterEl = document.getElementById('filter');
+
+  function render(){
+    const term = searchEl.value.toLowerCase();
+    const filter = filterEl.value;
+    grid.innerHTML = "";
+    courses.filter(c=>{
+      const matchesTerm = c.title.toLowerCase().includes(term) || c.desc.toLowerCase().includes(term);
+      const matchesFilter = (filter==="all") || (filter==="enrolled" && c.status==="enrolled") || (filter==="completed" && c.status==="completed");
+      return matchesTerm && matchesFilter;
+    }).forEach(c=>{
+      const div = document.createElement('div');
+      div.className="card";
+      div.innerHTML=`
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+        <div class="progress"><span style="width:${c.progress}%"></span></div>
+        <small>${c.progress}% complete</small>
+        <button class="btn btn-primary" onclick="viewCourse(${c.id})">View</button>
+      `;
+      grid.appendChild(div);
+    });
+  }
+
+  function viewCourse(id){
+    alert("Open course detail page for course #" + id);
+    // bạn có thể điều hướng sang course-detail.html?id=id
+  }
+
+  searchEl.addEventListener('input',render);
+  filterEl.addEventListener('change',render);
+
+  render();
+</script>
+</body>
+</html>
