@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ELMS • Student Profile</title>
+<style>
+  :root{
+    --bg:#0b1220; --bg2:#0f172a; --text:#e8eefc; --muted:#9db0d1;
+    --primary:#5b8cfe; --primary-600:#3d73ff; --ring:#83a2ff;
+    --ok:#21c38b; --danger:#ff6b6b; --shadow:0 20px 40px rgba(0,0,0,.35);
+  }
+  body{
+    margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--text);
+    background:linear-gradient(160deg, var(--bg), var(--bg2));
+    display:grid;place-items:center;min-height:100vh;
+  }
+  .card{
+    width:min(600px, calc(100% - 32px));
+    background:linear-gradient(180deg,#0e1731ee,#0a122bfa);
+    border:1px solid #25335f;border-radius:20px;box-shadow:var(--shadow);
+    padding:28px 26px 24px;
+  }
+  h1{text-align:center;margin:0 0 20px;font-size:1.8rem}
+  .avatar{
+    width:90px;height:90px;border-radius:50%;object-fit:cover;
+    border:3px solid var(--primary);box-shadow:0 0 0 4px rgba(91,140,254,.2);
+    display:block;margin:0 auto 14px;
+  }
+  form{display:grid;gap:16px}
+  label{font-weight:600}
+  .input{
+    width:100%;border-radius:12px;border:1px solid #2a3860;background:#0b1533;
+    color:var(--text);padding:12px 14px;font-size:1rem;outline:2px solid transparent;
+  }
+  .input:focus{outline-color:var(--ring)}
+  .btn{
+    appearance:none;border:0;border-radius:12px;padding:12px 18px;
+    font-weight:700;cursor:pointer;transition:.2s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(180deg,var(--primary),var(--primary-600));
+    color:white;box-shadow:0 10px 24px rgba(61,115,255,.35),inset 0 -2px 0 rgba(0,0,0,.25);
+  }
+  .btn-primary:hover{filter:brightness(1.05);transform:translateY(-1px)}
+  .btn-ghost{
+    background:transparent;color:var(--text);border:1px solid #2a3655
+  }
+  .btn-ghost:hover{background:#1a2540}
+  .row{display:flex;gap:12px;justify-content:center;margin-top:10px}
+  .success{color:var(--ok);font-weight:700;display:none;text-align:center;margin-top:10px}
+  .error{color:var(--danger);font-weight:600;display:none;text-align:center;margin-top:10px}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Student Profile</h1>
+    <img src="./images.jfif" alt="Avatar" class="avatar" />
+
+    <form id="profileForm" novalidate>
+      <div>
+        <label for="name">Full Name</label>
+        <input class="input" type="text" id="name" value="Nguyen Van A" required />
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input class="input" type="email" id="email" value="student@example.com" required />
+      </div>
+      <div>
+        <label for="password">New Password</label>
+        <input class="input" type="password" id="password" placeholder="••••••••" />
+      </div>
+      <div>
+        <label for="confirm">Confirm Password</label>
+        <input class="input" type="password" id="confirm" placeholder="••••••••" />
+      </div>
+      <p id="errorMsg" class="error">Passwords do not match.</p>
+      <p id="successMsg" class="success">Profile updated successfully!</p>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+
+    <div class="row">
+      <a href="student-dashboard.html" class="btn btn-ghost">Back to Dashboard</a>
+    </div>
+  </div>
+
+<script>
+  const form = document.getElementById('profileForm');
+  const pwdEl = document.getElementById('password');
+  const confirmEl = document.getElementById('confirm');
+  const errorEl = document.getElementById('errorMsg');
+  const successEl = document.getElementById('successMsg');
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    errorEl.style.display='none';
+    successEl.style.display='none';
+
+    if(pwdEl.value && pwdEl.value !== confirmEl.value){
+      errorEl.style.display='block';
+      return;
+    }
+
+    successEl.style.display='block';
+    // Demo: simulate save
+    setTimeout(()=>{ successEl.style.display='none'; }, 2000);
+  });
+</script>
+</body>
+</html>

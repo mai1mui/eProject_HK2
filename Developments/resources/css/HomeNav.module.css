@@ -1,0 +1,134 @@
+/* ===== Navbar (neon underline) ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #0a1b3f;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+
+/* Container & layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+}
+.navInner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.spacer { flex: 1; }
+
+/* Brand */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+.logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #60a5fa, #2563eb);
+  display: inline-block;
+}
+
+/* Menu */
+.navbar {}
+.navLinks {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Link + neon underline via ::after */
+.link {
+  position: relative;
+  display: inline-block;
+  padding: 8px 2px;
+  color: #e6eeff;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: .2px;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  background: linear-gradient(90deg, #60a5fa, #22d3ee, #a78bfa);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .28s ease;
+  border-radius: 2px;
+  box-shadow: none;
+}
+.link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 6px rgba(96,165,250,.55);
+}
+.link:hover::after {
+  transform: scaleX(1);
+  box-shadow:
+    0 0 6px rgba(96,165,250,.7),
+    0 0 12px rgba(34,211,238,.6),
+    0 0 18px rgba(167,139,250,.5);
+}
+
+/* Active route */
+.active {
+  color: #ffffff;
+  text-shadow:
+    0 0 6px rgba(96,165,250,.75),
+    0 0 12px rgba(34,211,238,.65);
+}
+.active::after {
+  transform: scaleX(1);
+  box-shadow:
+    0 0 8px rgba(96,165,250,.9),
+    0 0 16px rgba(34,211,238,.8),
+    0 0 24px rgba(167,139,250,.75);
+}
+
+/* Buttons (Theme/Login/Register…) */
+.btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+}
+.ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #e5e7eb;
+  transition: border-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.ghost:hover {
+  border-color: #60a5fa;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(96,165,250,.4);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .container { padding: 10px 16px; }
+  .navLinks { gap: 14px; }
+}
+@media (max-width: 640px) {
+  .navLinks { display: none; } /* Có thể thay bằng hamburger menu */
+}

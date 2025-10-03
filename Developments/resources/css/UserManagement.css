@@ -1,0 +1,663 @@
+/* ========== UserManagement (standalone) ========== */
+:root {
+    --bg: #0b1120;
+    --panel: #0f172a;
+    --panel-2: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --border: #243244;
+    --primary: #2563eb;
+    --primary-2: #1d4ed8;
+    --danger: #ef4444;
+    --pill-dark: #1f2937;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* card/khối chuẩn */
+.card-section {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+
+/* ---------------- Header mới ---------------- */
+.um-header {
+    margin-bottom: 14px;
+}
+
+/* Tiêu đề to hơn, nằm trên cùng */
+.um-title {
+    font-size: 24px; /* to hơn */
+    line-height: 1.25;
+    font-weight: 800;
+    color: var(--text);
+    margin: 2px 0 12px;
+}
+
+/* HÀNG 1: Lọc + Tìm kiếm (cùng 1 hàng) */
+.um-row1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* filters bên trái, search bên phải */
+    gap: 12px;
+    flex-wrap: wrap; /* đủ rộng thì 1 hàng, hẹp sẽ xuống hàng gọn */
+    margin-bottom: 10px;
+}
+
+.um-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.um-row1 select {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    outline: none;
+    min-width: 160px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.search-box input {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 12px;
+    min-width: 260px;
+    outline: none;
+}
+.search-box input::placeholder {
+    color: var(--muted);
+}
+
+/* HÀNG 2: Add New (trái) — Back (phải) */
+.um-row2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* trái/phải */
+    gap: 12px;
+    margin-top: 6px;
+}
+
+/* Buttons */
+.btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease;
+}
+.btn:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+.btn:active {
+    transform: translateY(0);
+}
+.btn.ghost {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+.btn.sm {
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 8px;
+}
+.btn.danger {
+    background: var(--danger);
+}
+
+/* ---------------- Bảng ---------------- */
+.table-wrap {
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.005)
+    );
+    margin-top: 12px;
+}
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+    color: var(--text);
+}
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--panel);
+    color: var(--text);
+    text-align: left;
+    font-weight: 600;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Pills (role/status/approval) */
+.pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+.pill.admin {
+    background: #0ea5e9;
+    color: #fff;
+}
+.pill.instructor {
+    background: #8b5cf6;
+    color: #fff;
+}
+.pill.learner {
+    background: #10b981;
+    color: #052e2b;
+}
+.pill.gray {
+    background: #374151;
+    color: #e5e7eb;
+}
+
+/* Helpers */
+.center {
+    text-align: center;
+}
+.muted {
+    color: var(--muted);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+}
+.pagination .pp {
+    margin-left: auto;
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+/* Modal/Forms (nếu trang có modal thêm/sửa) */
+.modal-open {
+    overflow: hidden;
+}
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal-profile {
+    width: 100%;
+    max-width: 720px;
+    max-height: 85vh;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.modal-profile.wide {
+    max-width: 880px;
+}
+.profile-header-modal {
+    padding: 16px 18px 6px;
+    border-bottom: 1px solid var(--border);
+}
+.profile-header-modal h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 12px 18px 16px;
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+}
+.settings-form1 {
+    padding: 12px 18px;
+}
+.form-section1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+}
+@media (max-width: 720px) {
+    .form-section1 {
+        grid-template-columns: 1fr;
+    }
+}
+.form-group1 {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.form-group1 label {
+    color: var(--muted);
+    font-size: 13px;
+}
+.form-group1 input,
+.form-group1 select,
+.form-group1 textarea {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    outline: none;
+}
+
+/* Avatar nhỏ trong bảng */
+.table img {
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+}
+
+/* Scrollbar (WebKit) */
+.table-wrap::-webkit-scrollbar,
+.modal-profile::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+.table-wrap::-webkit-scrollbar-thumb,
+.modal-profile::-webkit-scrollbar-thumb {
+    background: #1f2937;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+.table-wrap::-webkit-scrollbar-track,
+.modal-profile::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Nền trang tối */
+.admin-container,
+.dashboard-content {
+    color: var(--text);
+}
+/* Make numeric filter inputs look like dark selects */
+.um-filters input.filter-input {
+    background: #111827; /* đồng bộ nền tối */
+    color: #e5e7eb; /* chữ xám nhạt */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 8px 12px;
+    height: 40px;
+    outline: none;
+}
+
+.um-filters input.filter-input::placeholder {
+    color: rgba(229, 231, 235, 0.6);
+}
+/* ======== Pro Table Look ======== */
+.table-wrap.pro {
+    overflow: auto;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.table.pro {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #0b1220; /* nền panel tối */
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Sticky header + glassy */
+.table.pro thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: linear-gradient(
+        180deg,
+        rgba(15, 23, 42, 0.85),
+        rgba(15, 23, 42, 0.95)
+    );
+    backdrop-filter: blur(6px);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-size: 0.78rem;
+    color: #cbd5e1;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.table.pro tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px dashed rgba(148, 163, 184, 0.12);
+    vertical-align: middle;
+}
+
+.table.pro tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+/* Zebra + hover */
+.table.pro tbody tr:nth-child(2n) {
+    background: rgba(148, 163, 184, 0.03);
+}
+.table.pro tbody tr:hover {
+    background: rgba(99, 102, 241, 0.08);
+    transition: background 0.18s ease;
+}
+
+/* Cột số thứ tự gọn gàng */
+.table.pro .row-number {
+    color: #94a3b8;
+    text-align: center;
+    width: 56px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Ô nội dung rút gọn */
+.cell-ellipsis {
+    max-width: 520px; /* tuỳ bảng: 420–680px */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Pill / badge đẹp hơn */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5ch;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    background: rgba(148, 163, 184, 0.1);
+    color: #e2e8f0;
+}
+
+/* trạng thái riêng (matching .status + value) */
+.pill.status.waiting {
+    background: rgba(148, 163, 184, 0.1);
+    color: #94a3b8;
+}
+.pill.status.processed {
+    background: rgba(16, 185, 129, 0.14);
+    color: #34d399;
+    border-color: rgba(16, 185, 129, 0.35);
+}
+
+/* chấm trạng thái nhỏ ở đầu pill */
+.pill.status::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: currentColor;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04) inset;
+}
+.pill.status.waiting::before {
+    background: #94a3b8;
+}
+.pill.status.processed::before {
+    background: #34d399;
+}
+
+/* Button tinh gọn trong ô Action */
+.table.pro .btn.sm {
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 0.78rem;
+}
+.table.pro .btn.sm.ghost {
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+.table.pro .btn.sm.danger {
+    background: #ef4444;
+    color: #fff;
+}
+.table.pro .btn.sm:hover {
+    filter: brightness(0.96);
+}
+
+/* Pagination gọn hơn */
+.pagination {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pagination .pp {
+    border-radius: 10px;
+    background: #0b1220;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    color: #e2e8f0;
+    padding: 6px 10px;
+}
+
+/* Header area tinh chỉnh chút cho đồng bộ */
+.um-header .um-row1 .search-box input {
+    border-radius: 12px;
+    background: #0b1220;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    color: #e2e8f0;
+}
+.um-header select {
+    border-radius: 12px;
+    background: #0b1220;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    color: #e2e8f0;
+    padding: 8px 10px;
+}
+/* ===== Pretty View Modal (dùng chung) ===== */
+.modal-view {
+    width: min(720px, 92vw);
+    background: #0b1220;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 18px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    padding: 18px 18px 14px;
+    animation: popIn 0.15s ease-out;
+}
+@keyframes popIn {
+    from {
+        transform: scale(0.98);
+        opacity: 0.5;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.view-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.title-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(
+        180deg,
+        rgba(59, 130, 246, 0.15),
+        rgba(99, 102, 241, 0.08)
+    );
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    font-size: 18px;
+}
+.view-head h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    letter-spacing: 0.2px;
+    color: #e5e7eb;
+}
+.subtle {
+    margin: 0;
+    color: #9aa4b2;
+    font-size: 0.8rem;
+}
+
+.soft {
+    border: 0;
+    border-top: 1px solid rgba(148, 163, 184, 0.14);
+    margin: 12px 0;
+}
+
+.view-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+}
+.kv {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 10px;
+}
+.k {
+    color: #9aa4b2;
+    font-weight: 600;
+}
+.v {
+    color: #e5e7eb;
+}
+.span-2 {
+    grid-column: 1 / -1;
+}
+.text-block {
+    white-space: pre-wrap;
+    line-height: 1.6;
+    background: rgba(148, 163, 184, 0.06);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: #dbe3ea;
+}
+
+/* Status pill variants cho Submissions */
+.pill.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45ch;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    background: rgba(148, 163, 184, 0.1);
+    color: #e2e8f0;
+}
+.pill.status.submitted {
+    color: #34d399;
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(16, 185, 129, 0.35);
+}
+.pill.status.late {
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.14);
+    border-color: rgba(245, 158, 11, 0.35);
+}
+.pill.status.pending {
+    color: #94a3b8;
+    background: rgba(148, 163, 184, 0.12);
+}
+.pill.status::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+/* Actions bar */
+.view-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+.btn.primary {
+    background: #4f72ff;
+    color: #fff;
+    border-radius: 12px;
+    padding: 8px 14px;
+    box-shadow: 0 8px 22px rgba(79, 114, 255, 0.25);
+}
+.btn.icon.ghost {
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    color: #cbd5e1;
+}
+.btn.icon.ghost:hover {
+    background: rgba(148, 163, 184, 0.08);
+}
+.btn.soft {
+    background: rgba(148, 163, 184, 0.1);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    color: #e5e7eb;
+    border-radius: 12px;
+    padding: 8px 12px;
+}
+.btn.soft:hover {
+    filter: brightness(0.97);
+}

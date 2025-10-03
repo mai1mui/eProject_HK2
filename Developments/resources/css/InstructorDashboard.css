@@ -1,0 +1,2252 @@
+/* ===== Layout ===== */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    font-family: "Inter", Arial, sans-serif;
+    background: #111827;
+    color: #f9fafb;
+}
+
+/* ===== Topbar ===== */
+.topbar {
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f2937;
+    border-bottom: 1px solid #2c3e50;
+    padding: 0 20px;
+    gap: 20px;
+    animation: fadeSlideDown 0.4s ease;
+}
+
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.system-title {
+    font-size: 35px;
+    font-weight: 700;
+    color: #1abc9c;
+    white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Search Box ===== */
+.top-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 600px;
+}
+
+.search-input {
+    flex: 1;
+    height: 40px;
+    padding: 0 14px;
+    background: #0f172a;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    color: #f9fafb;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+    transform: scale(1.02);
+}
+
+.search-btn {
+    margin-left: 8px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #374151;
+    background: #1e293b;
+    color: #cbd5e1;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.search-btn:hover {
+    background: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+}
+
+.search-suggest {
+    position: absolute;
+    top: 46px;
+    left: 0;
+    right: 0;
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 2000;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    animation: fadeInScale 0.2s ease forwards;
+}
+
+/* Search Suggest Animation */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.suggest-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #f9fafb;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.25s, transform 0.2s;
+}
+
+.suggest-item:hover {
+    background: #1abc9c;
+    color: #fff;
+    transform: translateX(4px);
+}
+
+.pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: #374151;
+    color: #e5e7eb;
+}
+
+/* ===== Profile ===== */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* ========== Notifications (Bell + Mail) ========== */
+.notif-wrap {
+    position: relative;
+    margin-left: 12px;
+    display: inline-block;
+}
+
+.notification {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1e293b;
+    color: #f3f4f6;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 18px;
+}
+
+.notification:hover {
+    background: #374151;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.notification.mail {
+    background: #312e81;
+    color: #c7d2fe;
+}
+
+.notification.mail:hover {
+    background: #4338ca;
+    color: #fff;
+    transform: rotate(-5deg) scale(1.1);
+}
+
+.badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #ef4444;
+    color: #fff;
+    border-radius: 999px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Dropdown */
+.notif-dropdown {
+    position: absolute;
+    top: 44px;
+    right: 0;
+    width: 340px;
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: 1500;
+    overflow: hidden;
+    animation: fadeInScale 0.25s ease forwards;
+    color: #f9fafb;
+    backdrop-filter: blur(6px);
+}
+
+.notif-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid #374151;
+    font-weight: 600;
+    background: #111827;
+}
+
+.notif-head button {
+    background: #2563eb;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.notif-head button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.notif-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 320px;
+    overflow-y: auto;
+    scroll-behavior: smooth; /* smooth scroll */
+}
+
+.notif-dropdown li {
+    padding: 12px 14px;
+    border-bottom: 1px solid #374151;
+    font-size: 14px;
+    transition: background 0.25s, transform 0.2s;
+}
+
+.notif-dropdown li.unread {
+    background: #1e3a8a;
+}
+
+.notif-dropdown li.read {
+    background: transparent;
+}
+
+.notif-dropdown li:hover {
+    background: #2d3748;
+    transform: translateX(4px);
+}
+
+.notif-dropdown li .title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.notif-dropdown li.unread .title {
+    font-weight: 700;
+}
+
+.notif-dropdown li .msg {
+    font-size: 13px;
+    color: #d1d5db;
+    margin-bottom: 6px;
+}
+
+.notif-dropdown li.unread .msg {
+    color: #fff;
+}
+
+.notif-dropdown li small {
+    font-size: 12px;
+    color: #9ca3af;
+    display: block;
+    margin-top: 4px;
+}
+
+.notif-dropdown li.empty {
+    text-align: center;
+    color: #9ca3af;
+    padding: 16px;
+}
+
+/* View button */
+.open-link {
+    background: #10b981;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+    margin-top: 6px;
+}
+
+.open-link:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+}
+
+/* ===== Logout Button ===== */
+.logout-btn {
+    background: #e11d48;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+}
+
+.logout-btn:hover {
+    background: #be123c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(225, 29, 72, 0.4);
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    position: fixed !important;
+    top: 60px !important;
+    left: 0 !important;
+    bottom: 0;
+    width: 240px !important;
+    background: #2c3e50;
+    padding-top: 20px;
+    z-index: 900;
+    overflow-y: auto;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0 10px;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 8px;
+}
+
+.sidebar a {
+    color: #bdc3c7;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sidebar a:hover,
+.sidebar .active a {
+    background: #1abc9c;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: inset 4px 0 0 #16a085;
+    transform: translateX(4px);
+}
+
+/* ===== Main Content ===== */
+.main {
+    margin-left: 240px;
+    margin-top: 60px;
+    padding: 24px;
+    background: #111827;
+    min-height: calc(100vh - 60px);
+    flex: 1;
+    overflow-x: hidden;
+}
+
+/* ===== Dashboard Content ===== */
+.dashboard-content h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #f9fafb;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+/* Card style */
+.card {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    color: #e5e7eb;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-6px) scale(1.03);
+    background: linear-gradient(145deg, #243047, #111827);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+.card p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #9ca3af;
+    margin-bottom: 8px;
+}
+
+.card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f9fafb;
+}
+
+/* ===== Custom Dark Scrollbar ===== */
+.notif-dropdown ul::-webkit-scrollbar,
+.search-suggest::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.notif-dropdown ul::-webkit-scrollbar-track,
+.search-suggest::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track {
+    background: #1f2937;
+    border-radius: 4px;
+}
+
+.notif-dropdown ul::-webkit-scrollbar-thumb,
+.search-suggest::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
+}
+
+.notif-dropdown ul::-webkit-scrollbar-thumb:hover,
+.search-suggest::-webkit-scrollbar-thumb:hover,
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #4b5563;
+}
+/* ===== Theme Toggle ===== */
+.theme-toggle {
+    width: 50px;
+    height: 26px;
+    border-radius: 20px;
+    background: #374151;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.theme-toggle.light {
+    background: #d1d5db;
+}
+
+.toggle-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #f9fafb;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle.light .toggle-circle {
+    transform: translateX(24px);
+    background: #111827;
+}
+
+/* ===== Light Mode ===== */
+body:not(.dark-mode) {
+    background: #f9fafb;
+    color: #111827;
+}
+
+body:not(.dark-mode) .topbar {
+    background: #e5e7eb;
+    border-bottom: 1px solid #d1d5db;
+    color: #111827;
+}
+
+body:not(.dark-mode) .system-title {
+    color: #2563eb;
+    text-shadow: none;
+}
+
+body:not(.dark-mode) .sidebar {
+    background: #f3f4f6;
+}
+
+body:not(.dark-mode) .sidebar a {
+    color: #374151;
+}
+
+body:not(.dark-mode) .sidebar a:hover,
+body:not(.dark-mode) .sidebar .active a {
+    background: #2563eb;
+    color: #fff;
+}
+
+body:not(.dark-mode) .main {
+    background: #fff;
+}
+
+body:not(.dark-mode) .card {
+    background: #f3f4f6;
+    color: #111827;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+body:not(.dark-mode) .card:hover {
+    background: #e5e7eb;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+body:not(.dark-mode) .notif-dropdown {
+    background: #fff;
+    border: 1px solid #d1d5db;
+    color: #fff;
+}
+
+body:not(.dark-mode) .notif-dropdown li.unread {
+    background: #dbeafe;
+}
+
+body:not(.dark-mode) .notif-dropdown li .msg {
+    color: #dbeafe;
+}
+
+body:not(.dark-mode) .logout-btn {
+    background: #dc2626;
+}
+
+body:not(.dark-mode) .logout-btn:hover {
+    background: #b91c1c;
+}
+
+/* ===== Card chỉnh chữ đẹp hơn ===== */
+.card p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280; /* xám nhạt label */
+    margin-bottom: 8px;
+}
+
+.card h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2563eb; /* xanh dương nổi bật cho số liệu */
+}
+/* ===== Light Mode chỉnh Search Box trắng ===== */
+body:not(.dark-mode) .search-input {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #111827; /* chữ đen */
+}
+
+body:not(.dark-mode) .search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+body:not(.dark-mode) .search-btn {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151; /* icon xám */
+}
+
+body:not(.dark-mode) .search-btn:hover {
+    background: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+}
+/* Light Mode chỉnh màu chữ tiêu đề */
+body:not(.dark-mode) .dashboard-content h2 {
+    color: #111827; /* đen đậm */
+}
+
+/* Light Mode chỉnh chữ trong card */
+body:not(.dark-mode) .card p {
+    color: #6b7280; /* xám đậm */
+}
+
+body:not(.dark-mode) .card h2 {
+    color: #2563eb; /* xanh dương nổi bật */
+}
+
+/* Light Mode chỉnh màu chữ trong dropdown thông báo */
+body:not(.dark-mode) .notif-dropdown li .title {
+    color: #111827; /* đen đậm */
+}
+body:not(.dark-mode) .notif-dropdown li .msg {
+    color: #374151; /* xám đậm */
+}
+body:not(.dark-mode) .notif-dropdown li small {
+    color: #6b7280; /* xám nhạt */
+}
+/* Light Mode chỉnh màu nền dropdown thông báo */
+body:not(.dark-mode) .notif-dropdown li.unread {
+    background: #dbeafe; /* xanh nhạt */
+}
+body:not(.dark-mode) .notif-dropdown li.read {
+    background: transparent; /* trong suốt */
+}
+/* Light Mode chỉnh màu nút View */
+body:not(.dark-mode) .open-link {
+    background: #3b82f6; /* xanh dương */
+    color: #fff;
+}
+body:not(.dark-mode) .open-link:hover {
+    background: #2563eb; /* xanh dương đậm */
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.4);
+}
+/* Light Mode chỉnh màu nút Mark All as Read */
+body:not(.dark-mode) .notif-head button {
+    background: #3b82f6; /* xanh dương */
+    color: #fff;
+}
+body:not(.dark-mode) .notif-head button:hover {
+    background: #2563eb; /* xanh dương đậm */
+}
+/* ===== Profile Menu ===== */
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
+
+/* Trigger (avatar + tên) */
+.profile-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #374151; /* chữ tối mặc định (Light Mode) */
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.profile-trigger:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.profile-trigger .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-trigger .username {
+    font-size: 14px;
+}
+
+/* ===== Dropdown chung (Light Mode mặc định) ===== */
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    background: #ffffff; /* nền trắng */
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    width: 200px;
+    z-index: 2000;
+
+    /* hiệu ứng */
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: dropdownFadeIn 0.25s ease forwards;
+}
+
+@keyframes dropdownFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.profile-dropdown li {
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #374151; /* chữ đen */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.profile-dropdown li:hover {
+    background: #f3f4f6; /* hover xám nhạt */
+}
+
+.profile-dropdown li i {
+    width: 16px;
+    color: #6b7280; /* icon xám */
+    transition: color 0.2s;
+}
+
+.profile-dropdown li:hover i {
+    color: #2563eb; /* icon xanh khi hover */
+}
+
+/* ===== Dark Mode Override ===== */
+body.dark-mode .profile-trigger {
+    color: #f9fafb;
+}
+
+body.dark-mode .profile-trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .profile-dropdown {
+    background: #1f2937; /* nền tối */
+    border: 1px solid #374151;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .profile-dropdown li {
+    color: #e5e7eb; /* chữ sáng */
+}
+
+body.dark-mode .profile-dropdown li i {
+    color: #9ca3af;
+}
+
+body.dark-mode .profile-dropdown li:hover {
+    background: #374151; /* hover tối */
+}
+
+body.dark-mode .profile-dropdown li:hover i {
+    color: #3b82f6; /* icon xanh dương */
+}
+/* Profile dropdown */
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.profile-trigger .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 44px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    width: 300px;
+    z-index: 2000;
+    animation: fadeInScale 0.2s ease forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+}
+
+.profile-header .avatar.large {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.profile-header .info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-header .info strong {
+    font-size: 20px;
+    color: #111827;
+}
+
+.profile-header .info small {
+    font-size: 16px;
+    color: #6b7280;
+}
+
+/* Divider */
+.divider {
+    border: none;
+    height: 1px;
+    background: #374151; /* xám nhạt */
+    margin: 6px 0;
+}
+/* List */
+.profile-list {
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+}
+
+.profile-list li {
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.profile-list li i {
+    width: 16px;
+    color: #6b7280;
+}
+
+.profile-list li:hover {
+    background: #f3f4f6;
+}
+
+.profile-list li.danger {
+    color: #ef4444;
+}
+
+.profile-list li.danger i {
+    color: #ef4444;
+}
+
+/* Dark mode */
+body.dark-mode .profile-dropdown {
+    background: #1f2937;
+    border: 1px solid #374151;
+}
+
+body.dark-mode .profile-header .info strong {
+    color: #f9fafb;
+}
+body.dark-mode .profile-header .info small {
+    color: #9ca3af;
+}
+
+body.dark-mode .profile-list li {
+    color: #e5e7eb;
+}
+body.dark-mode .profile-list li i {
+    color: #9ca3af;
+}
+body.dark-mode .profile-list li:hover {
+    background: #374151;
+}
+body.dark-mode .profile-list li.danger,
+body.dark-mode .profile-list li.danger i {
+    color: #f87171;
+}
+body.dark-mode .divider {
+    background: #374151; /* xám đậm */
+}
+/* ==== MODAL — override only ==== */
+
+/* Overlay mờ + blur */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 12, 17, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    animation: modalFade 0.18s ease-out;
+}
+@keyframes modalFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Hộp modal */
+.modal-profile {
+    width: min(880px, 95vw);
+    background: var(--card-bg, #0f1521);
+    color: var(--text-color, #e7eefc);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    padding: 24px;
+    animation: modalPop 0.22s ease-out;
+}
+.modal-profile.wide {
+    width: min(980px, 96vw);
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: translateY(6px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Header modal */
+.profile-header-modal {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.profile-header-modal h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+.profile-header-modal p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted, #9fb0d1);
+}
+
+/* Avatar trong modal */
+.profile-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(127, 159, 255, 0.35);
+    box-shadow: 0 8px 18px rgba(54, 83, 209, 0.25);
+    background: #0b0f17;
+}
+
+/* Grid thông tin trong Profile modal (view) */
+.profile-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 16px 0 10px;
+}
+.profile-info > div {
+    background: var(--hover-bg, #0c1220);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 12px 14px;
+}
+.profile-info strong {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    color: var(--muted, #9fb0d1);
+    margin-bottom: 6px;
+}
+.profile-info span {
+    font-size: 15px;
+}
+.profile-info .active {
+    color: #47d16a;
+}
+.profile-info .inactive {
+    color: #f08b8b;
+}
+
+/* Settings form (trong modal .wide) */
+.settings-form {
+    margin-top: 6px;
+}
+.form-section {
+    background: var(--hover-bg, #0c1220);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 18px;
+}
+.form-section h3 {
+    margin: 0 0 12px;
+    font-size: 15px;
+    color: var(--text-color, #e7eefc);
+}
+
+/* Nhóm input hai cột: nhãn trái – input phải */
+.form-group2 {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+}
+.form-group2 label {
+    color: var(--muted, #9fb0d1);
+    font-size: 13px;
+}
+.form-group2 input[type="text"],
+.form-group2 input[type="email"],
+.form-group2 input[type="password"] {
+    height: 42px;
+    border-radius: 12px;
+    background: #0a1120;
+    border: 1px solid var(--border-color, rgba(127, 159, 255, 0.25));
+    color: var(--text-color, #e7eefc);
+    padding: 0 12px;
+    outline: none;
+    transition: box-shadow 0.14s ease, border-color 0.14s ease;
+}
+.form-group2 input:focus {
+    border-color: var(--primary, #7f9fff);
+    box-shadow: 0 0 0 3px rgba(127, 159, 255, 0.18);
+}
+
+/* Avatar upload trong Settings */
+.settings-avatar {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 6px 0 18px;
+}
+/* fallback nếu build không hỗ trợ: lặp lại */
+.settings-avatar img {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(127, 159, 255, 0.35);
+    box-shadow: 0 8px 18px rgba(54, 83, 209, 0.25);
+    background: #0b0f17;
+}
+
+.upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 12px;
+    background: #1a2240;
+    border: 1px solid rgba(127, 159, 255, 0.25);
+    color: #dfe8ff;
+    cursor: pointer;
+    transition: transform 0.12s ease, background 0.12s ease,
+        border-color 0.12s ease;
+}
+.upload-btn:hover {
+    background: #202a51;
+    transform: translateY(-1px);
+}
+.upload-btn:active {
+    transform: none;
+}
+
+/* Nút hành động */
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 6px;
+}
+.btn-save,
+.btn-close {
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease,
+        background 0.12s ease;
+}
+.btn-save {
+    background: linear-gradient(180deg, var(--primary, #4a6cff), #3653d1);
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(74, 108, 255, 0.35);
+}
+.btn-save:hover {
+    transform: translateY(-1px);
+}
+.btn-close {
+    background: #171f35;
+    color: #cbd7ff;
+    border-color: rgba(127, 159, 255, 0.22);
+}
+.btn-close:hover {
+    background: #1b2542;
+}
+
+/* Responsive cho modal */
+@media (max-width: 720px) {
+    .form-group2 {
+        grid-template-columns: 1fr;
+    }
+    .profile-info {
+        grid-template-columns: 1fr;
+    }
+    .settings-avatar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .profile-actions {
+        justify-content: stretch;
+    }
+    .btn-save,
+    .btn-close {
+        flex: 1;
+    }
+}
+/* ===== Activity Log ===== */
+.activity-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.activity-toolbar select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color, #374151);
+    background: var(--hover-bg, #0f172a);
+    color: var(--text-color, #f9fafb);
+    outline: none;
+}
+
+.activity-count {
+    font-size: 13px;
+    color: var(--muted, #9ca3af);
+}
+
+.log-list {
+    min-height: 180px;
+}
+
+.log-empty {
+    text-align: center;
+    color: var(--muted, #9ca3af);
+    padding: 24px 0;
+}
+
+/* 2 cột trên màn hình >= 768px, 1 cột khi nhỏ hơn */
+.log-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+@media (min-width: 768px) {
+    .log-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.log-item {
+    background: var(--hover-bg, #0f172a);
+    border: 1px solid var(--border-color, #374151);
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.log-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.log-badge {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #374151;
+    color: #e5e7eb;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.log-badge.login {
+    background: #1e40af;
+} /* xanh dương đậm */
+.log-badge.logout {
+    background: #6b7280;
+} /* xám */
+.log-badge.avatar-update {
+    background: #10b981;
+} /* xanh lá */
+.log-badge.profile-update {
+    background: #2563eb;
+} /* xanh dương */
+.log-badge.password-reset {
+    background: #f59e0b;
+} /* vàng */
+
+.log-time {
+    font-size: 12px;
+    color: var(--muted, #9ca3af);
+    white-space: nowrap;
+}
+
+.log-meta {
+    margin: 10px 0 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--text-color, #e5e7eb);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed var(--border-color, #374151);
+    border-radius: 6px;
+    padding: 8px;
+    max-height: 120px;
+    overflow: auto;
+}
+
+.log-aux {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.log-chip {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #1f2937;
+    color: #d1d5db;
+    border: 1px solid #374151;
+}
+
+.log-agent {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.activity-paging {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.btn-pager {
+    background: var(--primary, #2563eb);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.btn-pager:hover {
+    background: var(--primaryhover, #1d4ed8);
+    transform: translateY(-1px);
+}
+.btn-pager:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.page-indicator {
+    font-size: 13px;
+    color: var(--muted, #9ca3af);
+}
+/* ===================== Activity Log ===================== */
+
+/* Khi mở modal, chặn scroll nền */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Modal chứa Activity: cố định theo viewport, cuộn bên trong */
+.modal-profile {
+    display: flex;
+    flex-direction: column;
+    width: min(980px, 95vw);
+    max-height: 85vh; /* không cao hơn màn hình */
+    overflow: hidden; /* chặn cuộn bên ngoài */
+}
+
+/* Header phần tiêu đề */
+.profile-header-modal {
+    flex: 0 0 auto;
+    margin-bottom: 10px;
+}
+
+/* Thanh công cụ (filter + tổng số) */
+.activity-toolbar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.activity-toolbar select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color, #374151);
+    background: var(--hover-bg, #0f172a);
+    color: var(--text-color, #f9fafb);
+    outline: none;
+}
+
+.activity-count {
+    font-size: 13px;
+    color: var(--muted, #9ca3af);
+}
+
+/* Danh sách log: phần này mới là nơi cuộn */
+.log-list {
+    flex: 1 1 auto;
+    min-height: 0; /* quan trọng cho flex + overflow */
+    overflow: auto;
+    padding-right: 8px; /* chừa chỗ scrollbar */
+    padding-bottom: 88px; /* chừa đáy để không bị thanh paging che */
+}
+
+.log-empty {
+    text-align: center;
+    color: var(--muted, #9ca3af);
+    padding: 24px 0;
+}
+
+/* Lưới thẻ log: 2 cột (>= 1100px), 1 cột trên màn nhỏ */
+.log-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+@media (max-width: 1100px) {
+    .log-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Thẻ log */
+.log-item {
+    background: var(--hover-bg, #111827);
+    border: 1px solid var(--border-color, #334155);
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.log-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+/* Badge theo action */
+.log-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #0ea5e9; /* mặc định */
+    color: #fff;
+    text-transform: uppercase;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.log-badge.login {
+    background: #1e40af;
+} /* xanh dương đậm */
+.log-badge.logout {
+    background: #6b7280;
+} /* xám */
+.log-badge.avatar-update {
+    background: #10b981;
+} /* xanh lá */
+.log-badge.profile-update {
+    background: #2563eb;
+} /* xanh dương */
+.log-badge.password-reset {
+    background: #f59e0b;
+} /* vàng */
+.log-badge.password-change {
+    background: #eab308;
+} /* vàng đậm (nếu dùng) */
+
+.log-time {
+    font-size: 12px;
+    color: var(--muted, #9ca3af);
+    white-space: nowrap;
+}
+
+/* Meta JSON */
+.log-meta {
+    margin-top: 8px;
+    background: rgba(148, 163, 184, 0.08);
+    border: 1px dashed rgba(148, 163, 184, 0.35);
+    border-radius: 8px;
+    padding: 10px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 12px;
+    line-height: 1.45;
+    max-height: 140px;
+    overflow: auto;
+}
+
+/* Chip phụ (IP/Agent) */
+.log-aux {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.log-chip {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.15);
+    color: var(--text-color, #e5e7eb);
+    border: 1px solid var(--border-color, #374151);
+}
+.log-agent {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Phân trang: sticky cuối modal, luôn thấy – KHÔNG che list */
+.activity-paging {
+    flex: 0 0 auto;
+    position: sticky;
+    bottom: 0;
+    margin: 0 -24px -24px; /* kéo full ngang nếu modal có padding 24px */
+    padding: 12px 24px;
+    background: rgba(17, 24, 39, 0.92);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 2;
+}
+
+.btn-pager {
+    background: var(--primary, #2563eb);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.btn-pager:hover {
+    background: var(--primaryhover, #1d4ed8);
+    transform: translateY(-1px);
+}
+.btn-pager:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.page-indicator {
+    font-size: 13px;
+    color: var(--muted, #9ca3af);
+}
+
+/* Footer (nút Close) – luôn ở đáy modal, không bị che */
+.profile-actions {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color, #374151);
+    background: var(--card-bg, #0b1220);
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+}
+/* --- Remove the top border/line above the Close button --- */
+.profile-actions {
+    border-top: none !important; /* bỏ viền */
+    background: transparent; /* nếu muốn nền liền với dưới */
+}
+
+/* Nếu paging đang tạo bóng hay viền đè lên footer thì bỏ luôn */
+.activity-paging {
+    box-shadow: none !important;
+    border-top: none !important;
+}
+
+/* Phòng trường hợp theme tạo pseudo-border */
+.profile-actions::before,
+.profile-actions::after {
+    content: none !important;
+}
+/* Ẩn khối JSON meta */
+.log-meta {
+    display: none !important;
+}
+
+/* Ẩn chip/ dòng Agent, vẫn giữ IP */
+.log-aux .log-agent,
+.log-chip.log-agent {
+    display: none !important;
+}
+
+.log-agent-bubble {
+    display: none !important;
+}
+/* ===============================
+   ✨ Admin Dashboard – polish pack
+   (append to the END of AdminDashboard.css)
+   =============================== */
+
+/* Theme tokens */
+:root {
+    --bg: #0b1220;
+    --card-bg: #0e1520;
+    --text: #e7eefc;
+    --muted: #9fb0cc;
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+
+    --primary: #6ea8fe;
+    --primary-2: #3e7bf6;
+
+    --ok: #34d399;
+    --warn: #f59e0b;
+    --danger: #ef4444;
+    --info: #38bdf8;
+}
+
+/* Base fixes */
+.dashboard-content section {
+    margin-top: 22px;
+}
+.dashboard-content h2 {
+    font-size: 18px;
+    letter-spacing: 0.2px;
+    color: var(--text);
+    opacity: 0.95;
+    margin-bottom: 12px;
+}
+
+/* ===== Panels ===== */
+.panel-grid {
+    display: grid;
+    gap: 18px;
+}
+.panel-grid.two-two {
+    grid-template-columns: 1.5fr 1fr;
+}
+@media (max-width: 1200px) {
+    .panel-grid,
+    .panel-grid.two-two {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.03),
+            transparent 60%
+        ),
+        var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.panel-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.panel-head h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+}
+.panel-head.between {
+    justify-content: space-between;
+}
+
+.panel-body {
+    padding: 16px 18px;
+}
+.panel-foot {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+}
+.panel-foot.right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Tiny hints */
+.muted {
+    color: var(--muted);
+}
+.muted.small {
+    font-size: 12px;
+}
+.hint {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+/* ===== Sparkline (inherits color) ===== */
+.panel-body svg path {
+    stroke-linecap: round;
+    opacity: 0.95;
+}
+
+/* ===== Health rows ===== */
+.health-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+.health-row:last-child {
+    border-bottom: 0;
+}
+
+/* ===== Table ===== */
+.table-wrap {
+    overflow: auto;
+    border-radius: 12px;
+}
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+    color: var(--text);
+}
+.table thead th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+}
+.table tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+.table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.015);
+}
+.table .mono {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ===== Badges ===== */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.04);
+}
+.badge.ok {
+    color: #b9f5dd;
+    border-color: rgba(52, 211, 153, 0.35);
+    background: rgba(52, 211, 153, 0.15);
+}
+.badge.warn {
+    color: #ffe2b0;
+    border-color: rgba(245, 158, 11, 0.35);
+    background: rgba(245, 158, 11, 0.15);
+}
+.badge.danger {
+    color: #ffc7c7;
+    border-color: rgba(239, 68, 68, 0.35);
+    background: rgba(239, 68, 68, 0.15);
+}
+.badge.info {
+    color: #c9f0ff;
+    border-color: rgba(56, 189, 248, 0.35);
+    background: rgba(56, 189, 248, 0.15);
+}
+
+/* Status pill used in System Health */
+.inline-flex {
+    display: inline-flex;
+}
+
+/* ===== Action buttons ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn.primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: #0b1220;
+    box-shadow: 0 8px 20px rgba(110, 168, 254, 0.25);
+}
+.btn.primary:hover {
+    transform: translateY(-1px);
+}
+
+.btn.ghost {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    border-color: var(--border);
+}
+.btn.ghost:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* ===== Lists (Top courses) ===== */
+.list {
+    display: grid;
+    gap: 10px;
+}
+.list-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+}
+.strong {
+    font-weight: 600;
+}
+
+/* ===== Quick actions ===== */
+.actions {
+    display: grid;
+    gap: 10px;
+}
+.action-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+.action-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-1px);
+}
+
+/* ===== Announcements & Tasks ===== */
+.announce {
+    display: grid;
+    gap: 10px;
+}
+.announce li {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+}
+.tasks {
+    display: grid;
+    gap: 10px;
+}
+.task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.task input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+}
+
+/* ===== Tighter spacing for section under KPI ===== */
+.panel + .panel,
+.panel-grid + .panel-grid {
+    margin-top: 0;
+}
+/* --- Fix clipping/overlap in tables --- */
+.panel,
+.panel-body,
+.table-wrap {
+    overflow: visible; /* tránh cắt badge/pill */
+}
+
+.table-wrap {
+    overflow-x: auto; /* nếu hẹp quá thì cho scroll ngang nhẹ */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* cột fit trong panel, không tràn */
+    position: relative;
+    z-index: 1; /* nằm trên các lớp nền/shadow */
+}
+
+.table th,
+.table td {
+    padding: 12px 16px;
+    white-space: nowrap; /* không xuống dòng lung tung */
+    overflow: hidden; /* và nếu dài quá thì ... */
+    text-overflow: ellipsis; /* … */
+}
+
+/* đảm bảo cột Status/Date đủ rộng, không bị đẩy ra ngoài */
+.table th:nth-last-child(2),
+.table td:nth-last-child(2) {
+    width: 140px; /* Status */
+}
+.table th:last-child,
+.table td:last-child {
+    width: 170px; /* Date */
+}
+
+/* pills (badge) nổi trên mọi nền & không bị clip */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+}
+/* Panel chart spacing */
+.panel .panel-body svg {
+    border-radius: 10px;
+}
+.panel,
+.panel-body,
+.table-wrap {
+    overflow: visible;
+}
+.btn.chip {
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+.btn.chip.primary {
+    background: rgba(110, 168, 254, 0.15);
+    border-color: rgba(110, 168, 254, 0.45);
+}
+.btn.chip.ghost:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+.inbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+@media (max-width: 1000px) {
+    .inbox-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.inbox-col {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.inbox-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.inbox-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.inbox-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.inbox-item {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.inbox-item.unread {
+    border-color: rgba(124, 179, 255, 0.4);
+}
+.inbox-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.inbox-snippet {
+    opacity: 0.75;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+.inbox-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+.inbox-meta .time {
+    opacity: 0.6;
+    font-size: 12px;
+}
+.link-btn {
+    background: none;
+    border: none;
+    color: #8fb3ff;
+    cursor: pointer;
+    padding: 0;
+}
+.inbox-empty {
+    padding: 12px;
+    text-align: center;
+}
+/* ==== TOP INSTRUCTORS ==== */
+.ti-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+.ti-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 8px 12px;
+    align-items: center;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 14px;
+}
+.ti-rank {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+.ti-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    grid-row: 1 / span 2;
+}
+.ti-info {
+    display: grid;
+    gap: 2px;
+}
+.ti-name {
+    font-weight: 600;
+    line-height: 1.2;
+}
+.ti-sub {
+    font-size: 12.5px;
+    opacity: 0.9;
+}
+.ti-metric {
+    text-align: right;
+    align-self: center;
+}
+.ti-num {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+}
+.ti-label {
+    font-size: 12px;
+    opacity: 0.8;
+}
+.ti-actions {
+    grid-column: 2 / span 2;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 1100px) {
+    .ti-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.announce {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.announce-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+}
+.announce-item .icon {
+    opacity: 0.9;
+}
+.announce-item .spacer {
+    flex: 1;
+}
+.task-add input {
+    flex: 1;
+}
+.task-list .task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+}
+.task.done span {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+/* ---------- LIGHT MODE (body KHÔNG có .dark-mode) ---------- */
+/* Panel & khung */
+body:not(.dark-mode) .panel {
+    background: #ffffff;
+    color: #0f172a; /* text gần đen */
+    border: 1px solid #e5e7eb; /* viền nhạt */
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+body:not(.dark-mode) .panel .panel-head h3,
+body:not(.dark-mode) .panel .panel-head .muted,
+body:not(.dark-mode) .panel .panel-body,
+body:not(.dark-mode) .panel .panel-foot {
+    color: #0f172a;
+}
+
+/* Table */
+body:not(.dark-mode) .table {
+    color: #111827;
+    background: #ffffff;
+}
+body:not(.dark-mode) .table thead th {
+    background: #f3f4f6; /* header xám nhạt */
+    color: #0f172a;
+    border-bottom: 1px solid #e5e7eb;
+}
+body:not(.dark-mode) .table tbody td {
+    border-top: 1px solid #eef2f7;
+}
+body:not(.dark-mode) .table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* “Muted” text trong light */
+body:not(.dark-mode) .muted,
+body:not(.dark-mode) .muted.small {
+    color: #6b7280;
+}
+
+/* Badge trạng thái (Paid/Processing/…) */
+body:not(.dark-mode) .badge {
+    border: 1px solid transparent;
+    background: #f3f4f6;
+    color: #111827;
+}
+body:not(.dark-mode) .badge.ok {
+    /* Paid / Active */
+    background: #16a34a1a;
+    color: #166534;
+    border-color: #16a34a33;
+}
+body:not(.dark-mode) .badge.warn {
+    /* Processing */
+    background: #f59e0b1a;
+    color: #92400e;
+    border-color: #f59e0b33;
+}
+body:not(.dark-mode) .badge.danger {
+    /* Failed / Inactive */
+    background: #ef44441a;
+    color: #7f1d1d;
+    border-color: #ef444433;
+}
+body:not(.dark-mode) .badge.info {
+    /* Refunded / Info */
+    background: #3b82f61a;
+    color: #1e3a8a;
+    border-color: #3b82f633;
+}
+
+/* Nút chip/ghost trong light */
+body:not(.dark-mode) .btn.ghost,
+body:not(.dark-mode) .chip.ghost {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+}
+body:not(.dark-mode) .btn.primary,
+body:not(.dark-mode) .chip.primary {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+/* Inputs & select trong light */
+body:not(.dark-mode) .filter-input,
+body:not(.dark-mode) input[type="text"],
+body:not(.dark-mode) input[type="number"],
+body:not(.dark-mode) input[type="datetime-local"],
+body:not(.dark-mode) select,
+body:not(.dark-mode) textarea {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+}
+body:not(.dark-mode) .filter-input:focus,
+body:not(.dark-mode) input:focus,
+body:not(.dark-mode) select:focus,
+body:not(.dark-mode) textarea:focus {
+    outline: none;
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}

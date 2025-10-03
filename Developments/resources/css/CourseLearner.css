@@ -1,0 +1,75 @@
+/* ===== User box (avatar + menu) ===== */
+.navbar .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.userbox {
+    position: relative;
+}
+
+.userbtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+.userbtn .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userbtn .username {
+    font-size: 14px;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.userbtn .chev {
+    opacity: .8;
+}
+
+.usermenu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    background: #0f172a;
+    color: #e5e7eb;
+    min-width: 200px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    padding: 8px;
+    display: grid;
+    gap: 4px;
+    z-index: 1200;
+}
+
+.usermenu a,
+.usermenu .link {
+    display: block;
+    padding: 8px 10px;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+}
+
+.usermenu a:hover,
+.usermenu .link:hover {
+    background: rgba(255, 255, 255, .08);
+}
+
+.usermenu .danger {
+    color: #ef4444;
+}

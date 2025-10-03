@@ -1,0 +1,362 @@
+/* =========================================
+   QUIZ BUILDER & PREVIEW – DARK UI
+   ========================================= */
+
+/* ---------- Overlay ---------- */
+.qb-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    padding: 24px;
+}
+
+/* ---------- Card ---------- */
+.qb-card {
+    width: min(1200px, 96vw);
+    max-height: 90vh; /* không tràn màn hình */
+    background: #0e1525;
+    color: #e8ecff;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    display: flex; /* để header + body xếp dọc */
+    flex-direction: column;
+}
+
+/* ---------- Header ---------- */
+.qb-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.qb-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+.qb-head-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.qb-close {
+    appearance: none;
+    border: 0;
+    outline: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #e8ecff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: 0.15s ease;
+}
+.qb-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- Body: 2 cột ---------- */
+.qb-body {
+    flex: 1;
+    min-height: 0; /* cho phép con scroll */
+    display: grid;
+    grid-template-columns: 1fr 280px; /* trái nội dung, phải action */
+    gap: 16px;
+    padding: 16px;
+    overflow: hidden; /* tránh tràn ngang */
+}
+
+/* Cột trái – vùng soạn quiz: có scroll dọc */
+.qb-col.qb-scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+    padding-right: 6px; /* chừa chỗ scrollbar */
+}
+
+/* Cột phải: cố định, không scroll */
+.qb-col:last-child {
+    overflow: hidden;
+}
+
+/* ---------- Scrollbar đẹp ---------- */
+.qb-col.qb-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+.qb-col.qb-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+}
+.qb-col.qb-scroll::-webkit-scrollbar-thumb {
+    background: rgba(135, 160, 255, 0.55);
+    border-radius: 8px;
+}
+.qb-col.qb-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(135, 160, 255, 0.75);
+}
+
+/* ---------- Question block ---------- */
+.qb-question {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 14px;
+}
+.qb-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.qb-label {
+    font-size: 12px;
+    color: #aab3d6;
+    letter-spacing: 0.3px;
+}
+.qb-badge {
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #aab3d6;
+    border: 1px dashed rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+}
+
+/* ---------- Inputs ---------- */
+.qb-input {
+    width: 100%;
+    min-width: 0; /* tránh nở tràn ngang */
+    background: #0a1020;
+    color: #e8ecff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px 12px;
+    outline: 0;
+    transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+.qb-input::placeholder {
+    color: #7f8bb3;
+}
+.qb-input:focus {
+    border-color: rgba(143, 168, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(143, 168, 255, 0.15);
+}
+
+/* ---------- Upload (ảnh câu hỏi) ---------- */
+.qb-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+.qb-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    object-fit: cover;
+    flex: 0 0 56px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Option row ---------- */
+.qb-option {
+    display: grid;
+    grid-template-columns: 1fr auto auto; /* text | radio | nhóm btn */
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+.qb-radio {
+    width: 16px;
+    height: 16px;
+    accent-color: #7c91ff;
+    cursor: pointer;
+}
+.qb-inline {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* ---------- Buttons ---------- */
+.qb-btn {
+    appearance: none;
+    border: 0;
+    outline: 0;
+    border-radius: 10px;
+    background: #7c91ff;
+    color: #0e1525;
+    font-weight: 700;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: transform 0.05s ease, opacity 0.15s ease, background 0.2s ease;
+}
+.qb-btn:hover {
+    filter: brightness(1.05);
+}
+.qb-btn:active {
+    transform: translateY(1px);
+}
+
+/* Variants */
+.qb-btn.ghost {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e8ecff;
+}
+.qb-btn.secondary {
+    background: rgba(143, 168, 255, 0.18);
+    color: #e8ecff;
+}
+.qb-btn.danger {
+    background: #ff6b7b;
+    color: #0e1525;
+}
+
+/* Size mini (nút nhỏ trên dòng) */
+.qb-mini {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+/* File input ẩn đi bên trong button */
+.qb-file {
+    display: none;
+}
+
+/* Hàng action dưới mỗi block hoặc cột phải */
+.qb-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* Helper ở cột phải */
+.qb-chip {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: #bfc7e6;
+}
+.qb-helper {
+    font-size: 12px;
+    color: #90a0d4;
+    line-height: 1.5;
+}
+
+/* =========================================
+   PREVIEW – scroll y như cột quiz
+   ========================================= */
+.qp-body {
+    flex: 1; /* chiếm phần còn lại dưới header preview */
+    min-height: 0;
+    overflow-y: auto; /* bật cuộn dọc */
+    overflow-x: hidden;
+    padding: 16px;
+}
+
+/* Scrollbar preview giống quiz */
+.qp-body::-webkit-scrollbar {
+    width: 8px;
+}
+.qp-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+}
+.qp-body::-webkit-scrollbar-thumb {
+    background: rgba(135, 160, 255, 0.55);
+    border-radius: 8px;
+}
+.qp-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(135, 160, 255, 0.75);
+}
+
+/* Nội dung preview */
+.qp-empty {
+    text-align: center;
+    color: #aab3d6;
+}
+.qp-counter {
+    color: #aab3d6;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+.qp-qimg-wrap {
+    display: grid;
+    place-items: center;
+    margin-bottom: 10px;
+}
+.qp-qimg {
+    max-width: 100%;
+    max-height: 260px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    object-fit: contain;
+}
+.qp-qtext {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.qp-options {
+    display: grid;
+    gap: 10px;
+}
+.qp-option {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* radio | text | thumb */
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 10px;
+}
+.qp-option input {
+    width: 16px;
+    height: 16px;
+}
+.qp-oimg {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.qp-nav {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 920px) {
+    .qb-body {
+        grid-template-columns: 1fr;
+    }
+    .qb-col:last-child {
+        margin-top: 12px;
+    }
+}
+
+/* Bảo đảm các phần tử không nở tràn ngang */
+.qb-input,
+.qb-upload,
+.qb-option {
+    width: 100%;
+    min-width: 0;
+}

@@ -1,0 +1,288 @@
+/* ===== Navbar (neon underline active) ===== */
+.navbar {
+  background: #0a1b3f;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+
+.navbar .logo {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: .3px;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links a {
+  position: relative;
+  display: inline-block;
+  padding: 8px 2px; /* nhỏ để underline sát chữ */
+  color: #e6eeff;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: .2px;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+
+/* Vạch dưới (ẩn mặc định) */
+.navbar .nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;           /* nằm sát chân chữ */
+  height: 2px;
+  background: linear-gradient(90deg, #60a5fa, #22d3ee, #a78bfa);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .28s ease;
+  border-radius: 2px;
+  box-shadow: none;       /* mặc định không phát sáng */
+}
+
+/* Hover: hiện underline + nhẹ neon */
+.navbar .nav-links a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 6px rgba(96,165,250,.55);
+}
+.navbar .nav-links a:hover::after {
+  transform: scaleX(1);
+  box-shadow:
+    0 0 6px rgba(96,165,250,.7),
+    0 0 12px rgba(34,211,238,.6),
+    0 0 18px rgba(167,139,250,.5);
+}
+
+/* === TRANG ACTIVE: underline luôn hiển thị + neon mạnh hơn === */
+.navbar .nav-links a.active {
+  color: #ffffff;
+  text-shadow:
+    0 0 6px rgba(96,165,250,.75),
+    0 0 12px rgba(34,211,238,.65);
+}
+.navbar .nav-links a.active::after {
+  transform: scaleX(1);
+  box-shadow:
+    0 0 8px rgba(96,165,250,.9),
+    0 0 16px rgba(34,211,238,.8),
+    0 0 24px rgba(167,139,250,.75);
+}
+
+/* Tuỳ chọn: nếu bạn không dùng NavLink,
+   bạn có thể thêm class 'current' thủ công */
+.navbar .nav-links a.current {
+  color: #fff;
+}
+.navbar .nav-links a.current::after {
+  transform: scaleX(1);
+  box-shadow:
+    0 0 8px rgba(96,165,250,.9),
+    0 0 16px rgba(34,211,238,.8),
+    0 0 24px rgba(167,139,250,.75);
+}
+
+.navbar .auth {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn.ghost {
+  background: transparent;
+  border: 1px solid #2563eb;
+  color: #93c5fd;
+  transition: border-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.btn.ghost:hover {
+  color: #fff;
+  border-color: #60a5fa;
+  box-shadow: 0 0 12px rgba(96,165,250,.4);
+}
+
+/* ===== Toolbar ===== */
+.toolbar {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  background: #111827;
+}
+.searchbar {
+  display: flex;
+  gap: 10px;
+}
+.searchbar input, .searchbar select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #314160;
+  background: #0b1220;
+  color: #e5e7eb;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.searchbar input::placeholder { color: #8aa0c6; }
+.searchbar input:focus, .searchbar select:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96,165,250,.2);
+}
+
+/* ===== Course Grid ===== */
+.grid {
+  padding: 20px 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.course-card {
+  background: #0e1626;               /* dark card */
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  color: #dbe7ff;
+}
+.card-top {
+  position: relative;
+}
+.cover {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  background: #0b1220;
+}
+.rating-chip {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f59e0b;
+  color: #0b1220;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,0,0,.35);
+}
+.card-body {
+  padding: 12px 14px 14px;
+}
+.course-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 6px 0 4px;
+}
+.course-title a {
+  text-decoration: none;
+  color: #e7f0ff;
+}
+.course-title a:hover { color: #ffffff; }
+
+.desc {
+  font-size: 14px;
+  color: #9eb3d9;
+}
+.meta {
+  font-size: 13px;
+  margin: 8px 0;
+  color: #c7d6fb;
+}
+.meta .muted {
+  color: #95a8cc;
+}
+.card-actions {
+  margin-top: auto;
+  padding: 10px 0;
+}
+.card-actions .btn.primary {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border: none;
+}
+
+/* ===== Stars ===== */
+.starsbar {
+  display: inline-block;
+  font-size: 14px;
+  position: relative;
+  color: #3b4a70;
+}
+.starsbar-bg { color: #3b4a70; }
+.starsbar-fill {
+  position: absolute;
+  top: 0; left: 0;
+  overflow: hidden;
+  color: #fbbf24;
+  white-space: nowrap;
+  text-shadow: 0 0 6px rgba(251,191,36,.45);
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: #0a1b3f;
+  color: #e7f0ff;
+  padding: 40px 32px;
+  margin-top: 40px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.footer-top h4 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+.footer-top ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-top ul li { margin: 6px 0; }
+.footer-top a {
+  color: #cfe0ff;
+  text-decoration: none;
+}
+.footer-top a:hover { color: #fff; text-decoration: underline; }
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #b5c7f0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .navbar { padding: 12px 18px; }
+  .navbar .nav-links { gap: 14px; }
+  .grid { padding: 16px; gap: 16px; }
+}
+@media (max-width: 640px) {
+  .navbar .nav-links { display: none; } /* tuỳ bạn, có thể thay bằng hamburger */
+}

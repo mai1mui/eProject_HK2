@@ -1,0 +1,364 @@
+/* ===== Courses.module.css — Public Courses listing (pro) ===== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+
+/* Ghi chú: file này dùng chung tokens với HomeUltra.module.css:
+   --bg0, --bg1, --bg2, --txt, --muted, --brand1, --brand2, --ring, --glass, --bd
+   Nếu trang Home đã có :root các biến trên thì không cần khai lại.
+*/
+
+.page {
+    min-height: 100svh;
+    color: var(--txt);
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+        sans-serif;
+    background: radial-gradient(
+            900px 520px at 80% -10%,
+            rgba(32, 128, 255, 0.18),
+            transparent 60%
+        ),
+        radial-gradient(
+            800px 420px at 12% 5%,
+            rgba(0, 170, 255, 0.12),
+            transparent 60%
+        ),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 40%, var(--bg2));
+    position: relative;
+    isolation: isolate;
+}
+.container {
+    width: min(1200px, 92vw);
+    margin-inline: auto;
+}
+
+.header {
+    padding: 28px 0 18px;
+    border-bottom: 1px solid var(--bd);
+    backdrop-filter: blur(8px);
+}
+.title {
+    margin: 0;
+    font-size: clamp(1.6rem, 1.4rem + 1.6vw, 2.4rem);
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    background: linear-gradient(180deg, #f7f9ff 10%, #b8ccff 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.subtitle {
+    margin: 8px 0 0;
+    color: color-mix(in srgb, var(--txt) 70%, transparent);
+}
+
+/* ===== Controls ===== */
+.controls {
+    margin: 18px 0 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+.search {
+    flex: 1 1 320px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 12px;
+    background: var(--glass);
+    border: 1px solid var(--bd);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.searchIcon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.9;
+}
+.input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--txt);
+    font: 600 0.98rem/1.2 "Inter", system-ui, -apple-system, Segoe UI, Roboto,
+        Arial, sans-serif;
+}
+.input::placeholder {
+    color: color-mix(in srgb, var(--txt) 55%, transparent);
+}
+
+.select {
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 12px;
+    border: 1px solid var(--bd);
+    background: var(--glass);
+    color: var(--txt);
+    font-weight: 600;
+}
+.select:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 40%, transparent),
+        0 0 0 6px color-mix(in srgb, var(--ring) 16%, transparent);
+}
+
+.counter {
+    margin-left: auto;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+/* ===== Chips (filters quick) ===== */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0 2px;
+}
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid var(--bd);
+    background: var(--glass);
+    color: var(--txt);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 0.16s ease, box-shadow 0.16s ease,
+        background 0.16s ease, border-color 0.16s ease;
+}
+.chip:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.16);
+}
+.chipActive {
+    background: linear-gradient(180deg, var(--brand1), var(--brand2))
+            padding-box,
+        linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.35),
+                rgba(255, 255, 255, 0.1)
+            )
+            border-box;
+    border: 1px solid transparent;
+    color: #fff;
+}
+
+/* ===== Grid & Cards ===== */
+.grid {
+    margin: 18px 0 28px;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--bd);
+    border-radius: 16px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.06),
+        rgba(255, 255, 255, 0.03)
+    );
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.18s ease, box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+.card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--ring) 40%, transparent);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+}
+
+.thumb {
+    aspect-ratio: 16 / 9;
+    background: radial-gradient(
+            120% 90% at 0% 0%,
+            rgba(80, 140, 255, 0.18),
+            transparent 60%
+        ),
+        color-mix(in srgb, var(--glass) 90%, transparent);
+    border-bottom: 1px solid var(--bd);
+}
+.body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.titleRow {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+}
+.badge {
+    height: 24px;
+    padding: 0 8px;
+    border-radius: 999px;
+    border: 1px solid var(--bd);
+    background: var(--glass);
+    color: var(--txt);
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.4px;
+}
+.cardTitle {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    color: var(--txt);
+}
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.tag {
+    height: 24px;
+    padding: 0 8px;
+    border-radius: 8px;
+    background: var(--glass);
+    border: 1px solid var(--bd);
+    color: var(--txt);
+    font-weight: 700;
+    font-size: 0.78rem;
+}
+
+.star {
+    color: #ffc531;
+} /* sao vàng */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+}
+.dot {
+    opacity: 0.6;
+}
+
+.footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid var(--bd);
+    background: var(--glass);
+    color: inherit;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+    transition: transform 0.16s ease, box-shadow 0.16s ease,
+        border-color 0.16s ease, background 0.16s ease;
+}
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
+}
+.primary {
+    background: linear-gradient(180deg, var(--brand1), var(--brand2))
+            padding-box,
+        linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.35),
+                rgba(255, 255, 255, 0.1)
+            )
+            border-box;
+    border: 1px solid transparent;
+    color: #fff;
+}
+
+/* ===== Pagination ===== */
+.pager {
+    padding: 4px 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.pageBtn {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid var(--bd);
+    background: var(--glass);
+    color: var(--txt);
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease,
+        background 0.16s ease, border-color 0.16s ease;
+}
+.pageBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.18);
+}
+.current {
+    background: linear-gradient(180deg, var(--brand1), var(--brand2))
+            padding-box,
+        linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.35),
+                rgba(255, 255, 255, 0.1)
+            )
+            border-box;
+    border: 1px solid transparent;
+    color: #fff;
+}
+
+/* ===== Light theme tweaks ===== */
+:global(body.light) .title {
+    background: linear-gradient(180deg, #0b1220 10%, #395bca 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+:global(body.light) .card,
+:global(body.light) .pager {
+    box-shadow: none;
+}
+:global(body.light) .card {
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08);
+}

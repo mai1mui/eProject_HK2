@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ELMS • Assignment Management</title>
+<style>
+  body {
+    margin:0; font-family:Inter,system-ui,sans-serif;
+    background:linear-gradient(160deg,#0b1220,#0f172a);
+    color:#e8eefc; display:grid; place-items:center; min-height:100vh;
+  }
+  .card {
+    width:min(900px,calc(100% - 32px));
+    background:#0e1731ee; border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,.35); padding:28px;
+  }
+  h1{margin:0 0 20px;text-align:center;font-size:1.8rem}
+  table{width:100%;border-collapse:collapse;margin-top:20px}
+  th,td{padding:12px 10px;border-bottom:1px solid #25335f;text-align:left}
+  th{color:#9db0d1}
+  .btn{padding:8px 14px;border:0;border-radius:10px;font-weight:600;cursor:pointer}
+  .btn-primary{background:#5b8cfe;color:white}
+  .btn-danger{background:#ff6b6b;color:white}
+  .btn-ghost{background:transparent;border:1px solid #2a3860;color:#e8eefc}
+  .top-bar{display:flex;justify-content:space-between;align-items:center}
+  .input{padding:10px;border-radius:10px;border:1px solid #2a3860;background:#0b1533;color:white}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="top-bar">
+      <h1>Assignment Management</h1>
+      <button class="btn btn-primary" onclick="addAssignment()">+ New Assignment</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Title</th><th>Course</th><th>Deadline</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="assignmentTable">
+        <tr>
+          <td>1</td><td>Homework 1</td><td>Intro to Programming</td><td>2025-09-05</td>
+          <td>
+            <button class="btn btn-ghost" onclick="editAssignment(this)">Edit</button>
+            <button class="btn btn-danger" onclick="deleteAssignment(this)">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td><td>Homework 1</td><td>Intro to Programming 2</td><td>2025-10-04</td>
+          <td>
+            <button class="btn btn-ghost" onclick="editAssignment(this)">Edit</button>
+            <button class="btn btn-danger" onclick="deleteAssignment(this)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<script>
+function addAssignment(){
+  const table=document.getElementById("assignmentTable");
+  const row=table.insertRow();
+  row.innerHTML=`<td>NEW</td>
+    <td><input class="input" placeholder="Assignment title"></td>
+    <td><input class="input" placeholder="Course"></td>
+    <td><input class="input" type="date"></td>
+    <td><button class="btn btn-primary">Save</button></td>`;
+}
+function editAssignment(btn){
+  alert("Edit assignment feature coming soon!");
+}
+function deleteAssignment(btn){
+  btn.closest("tr").remove();
+}
+</script>
+</body>
+</html>
